@@ -1,0 +1,18 @@
+package ethash
+
+import (
+    "math/big"
+
+    "github.com/ethereum/go-ethereum/consensus"
+    "github.com/ethereum/go-ethereum/core/types"
+)
+
+// calcDifficultyBitcoin adalah placeholder.
+// Implementasi retarget Bitcoin akan ditambahkan pada tahap berikutnya.
+func calcDifficultyBitcoin(
+    chain consensus.ChainHeaderReader,
+    time uint64,
+    parent *types.Header,
+) *big.Int {
+    return calcDifficultyHomestead(time, parent)
+}
