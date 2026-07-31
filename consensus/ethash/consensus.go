@@ -676,16 +676,17 @@ func accumulateRewards(config *params.ChainConfig, state *state.StateDB, header 
 
     reward := new(big.Int).Mul(
         big.NewInt(50),
-        big.NewInt(1000000000000000000),
+        big.NewInt(1000000000000000000), // 50 GSPD
     )
 
     halvings := header.Number.Uint64() / halvingInterval
 
-    for i := uint64(0); i < halvings; i++ {
-        reward.Div(reward, big.NewInt(2))
-
-        if reward.Sign() == 0 {
-            break
+    // Stop block reward setelah halving ke-33 (mirip Bitcoin)
+    if halvings >= 33 {
+        reward = big.NewInt(0)
+    } else {
+        for i := uint64(0); i < halvings; i++ {
+            reward.Div(reward, big.NewInt(2))
         }
     }
 
