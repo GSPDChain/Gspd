@@ -678,3 +678,38 @@ https://github.com/GSPDChain/Gspd
 ## License
 
 GNU Lesser General Public License v3.0
+
+
+## Quick Start
+
+### Clone Repository
+
+```bash
+git clone https://github.com/GSPDChain/Gspd.git
+cd Gspd
+```
+
+### Build Geth
+
+```bash
+make geth
+```
+
+### Initialize GSPD Mainnet
+
+```bash
+./build/bin/geth init genesis/mainnet.json --datadir ./gspd-data
+```
+
+### Run GSPD Node
+
+```bash
+./build/bin/geth \
+  --datadir ./gspd-data \
+  --networkid 2025 \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+```
