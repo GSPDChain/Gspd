@@ -775,3 +775,122 @@ See the documentation inside each repository.
 ## License
 
 MIT License
+
+# GSPD Chain
+
+GSPD Chain adalah blockchain Proof-of-Work (PoW) yang menyediakan ekosistem lengkap untuk membangun aplikasi blockchain, wallet, explorer, RPC, DEX, exchange, smart contracts, mining pool, dan bridge.
+
+## Features
+
+- Proof-of-Work (Ethash)
+- 21,000,000 Maximum Supply
+- Geth-based Blockchain
+- JSON-RPC Support
+- Mining Pool
+- Block Explorer
+- Web Wallet
+- Decentralized Exchange (DEX)
+- Bridge Infrastructure
+- REST API
+- Cloudflare Tunnel Support
+
+## Components
+
+| Component | Description |
+|----------|-------------|
+| GSPD Blockchain | Core blockchain node |
+| GSPD API | Backend REST API |
+| GSPD Wallet | Web wallet |
+| GSPD Explorer | Blockchain explorer |
+| GSPD RPC | Public RPC interface |
+| GSPD DEX | Decentralized exchange |
+| GSPD Exchange | Exchange backend |
+| GSPD Contracts | Smart contracts |
+| GSPD Proxy | RPC/GRC proxy |
+| GSPD Cloudflare | Cloudflare Tunnel configuration |
+
+## Start Order
+
+Start services in the following order:
+
+### 1. Start GSPD Blockchain
+
+```bash
+cd /root/go-ethereum-gspd-bitcoin
+
+# Start Geth using your GSPD configuration
+```
+
+### 2. Start GRC Proxy
+
+```bash
+cd /root/backup/gspd-chain
+node grc-proxy.js
+```
+
+### 3. Start Cloudflare Tunnel
+
+```bash
+cloudflared tunnel --config /root/.cloudflared/config.yml run
+```
+
+### 4. Start GSPD API
+
+```bash
+cd ~/gspd-api
+node index.js
+```
+
+### 5. Start Mining Pool
+
+```bash
+cd ~/gspd-api/gspd-pool
+
+node api/server.js
+node stratum/server.js
+```
+
+## Architecture
+
+```
+Wallet
+   │
+Explorer
+   │
+DEX
+   │
+Exchange
+   │
+   ▼
+GSPD API
+   │
+   ▼
+GRC Proxy
+   │
+   ▼
+Geth Node
+   │
+   ▼
+GSPD Blockchain
+```
+
+## Related Projects
+
+- **GSPD Blockchain** — https://github.com/GSPDChain/Gspd
+- **GSPD API** — https://github.com/GSPDChain/gspd-api
+- **GSPD Wallet** — https://github.com/GSPDChain/gspd-wallet
+- **GSPD Explorer** — https://github.com/GSPDChain/gspd-explorer
+- **GSPD RPC** — https://github.com/GSPDChain/gspd-rpc
+- **GSPD DEX** — https://github.com/GSPDChain/gspd-dex
+- **GSPD Exchange** — https://github.com/GSPDChain/gspd-exchange
+- **GSPD Smart Contracts** — https://github.com/GSPDChain/gspd-contracts
+- **GSPD Proxy** — https://github.com/GSPDChain/gspd-proxy
+- **GSPD Cloudflare** — https://github.com/GSPDChain/gspd-cloudflare
+
+## Documentation
+
+See the documentation provided in each repository.
+
+## License
+
+MIT License
