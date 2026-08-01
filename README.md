@@ -560,3 +560,121 @@ genesis/mainnet.json
 ## License
 
 This project is released under the GNU Lesser General Public License v3.0.
+
+
+## Network Information
+
+- Network Name: GSPD Mainnet
+- Chain ID: 2025
+- Consensus: Ethash (Proof-of-Work)
+
+### Official Bootstrap Node
+
+```
+enode://ee973b2637cc86181df92e20342d7592130af06ef7551673df661275a21297c165fe16ab68e77030e619f8adc1d29b38f923e1e92de1e8a5b7e18ff29f0fd22c@182.8.130.113:30303
+```
+
+### Genesis Hash
+
+```
+0x4ac0c9019e184b0ed333b977bb246084aadcf68d478618a2a33a2dd35e07afbb
+```
+
+
+# GSPD
+
+GSPD is an open-source Proof-of-Work blockchain based on Go Ethereum. The project provides a decentralized blockchain with native mining, GRC20 smart contracts, RPC, wallet support, explorer, and decentralized exchange (DEX).
+
+## Features
+
+- Proof-of-Work (Ethash)
+- Native GSPD Coin
+- GRC20 Smart Contracts
+- JSON-RPC API
+- Peer-to-Peer Network
+- Native Mining
+- Explorer
+- Wallet
+- DEX
+- Liquidity Pair Creation
+
+## Build
+
+```bash
+make geth
+```
+
+Binary output:
+
+```text
+build/bin/geth
+```
+
+## Initialize GSPD Mainnet
+
+```bash
+build/bin/geth init genesis/mainnet.json --datadir /path/to/gspd-data
+```
+
+Example:
+
+```bash
+build/bin/geth init genesis/mainnet.json --datadir /root/gspd-data
+```
+
+## Run GSPD Node
+
+```bash
+build/bin/geth \
+  --datadir /root/gspd-data \
+  --networkid 2025 \
+  --port 30303 \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+```
+
+## Mining
+
+```bash
+build/bin/geth \
+  --mine \
+  --miner.threads 4
+```
+
+## Network Information
+
+| Item | Value |
+|------|-------|
+| Network | GSPD Mainnet |
+| Chain ID | 2025 |
+| Network ID | 2025 |
+| Consensus | Ethash (Proof-of-Work) |
+
+## Genesis Hash
+
+```
+0x4ac0c9019e184b0ed333b977bb246084aadcf68d478618a2a33a2dd35e07afbb
+```
+
+## Official Bootstrap Node
+
+```
+enode://ee973b2637cc86181df92e20342d7592130af06ef7551673df661275a21297c165fe16ab68e77030e619f8adc1d29b38f923e1e92de1e8a5b7e18ff29f0fd22c@182.8.130.113:30303
+```
+
+## Genesis
+
+```
+genesis/mainnet.json
+```
+
+## Repository
+
+https://github.com/GSPDChain/Gspd
+
+## License
+
+GNU Lesser General Public License v3.0
