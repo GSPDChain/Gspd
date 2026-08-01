@@ -713,3 +713,65 @@ make geth
   --http.api admin,eth,net,web3,personal \
   console
 ```
+
+
+# GSPD Chain
+
+GSPD Chain adalah blockchain Proof-of-Work yang memiliki ekosistem lengkap untuk Wallet, Explorer, API, DEX, Exchange, RPC, Mining Pool, dan Bridge.
+
+## Repositories
+
+| Repository | Description |
+|------------|-------------|
+| Gspd | Blockchain Node |
+| gspd-api | Backend API |
+| gspd-wallet | Web Wallet |
+| gspd-explorer | Blockchain Explorer |
+| gspd-contracts | Smart Contracts |
+| gspd-rpc | RPC Website |
+| gspd-dex | Decentralized Exchange |
+| gspd-exchange | Centralized Exchange Backend |
+| gspd-proxy | GRC Proxy |
+| gspd-cloudflare | Cloudflare Tunnel Configuration |
+
+## Architecture
+
+```
+Wallet
+   │
+Explorer
+   │
+DEX
+   │
+Exchange
+   │
+   ▼
+GSPD API
+   │
+   ▼
+GRC Proxy
+   │
+   ▼
+Geth Node
+   │
+   ▼
+GSPD Blockchain
+```
+
+## Installation
+
+1. Install GSPD Node.
+2. Start Geth.
+3. Start GRC Proxy.
+4. Start Cloudflare Tunnel.
+5. Start GSPD API.
+6. Start Mining Pool.
+7. Open Wallet or Explorer.
+
+## Documentation
+
+See the documentation inside each repository.
+
+## License
+
+MIT License
