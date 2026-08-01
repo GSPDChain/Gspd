@@ -1,0 +1,36 @@
+# Build output
+build/bin/
+
+# Go build cache
+*.test
+*.out
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Node.js
+node_modules/
+
+# Blockchain database
+chaindata/
+gspd-data/
+
+# Keystore backup (opsional)
+*.keystore.bak
+
+# Bootnode private key
+bootnode/boot.key
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# OS files
+.DS_Store
+Thumbs.db
