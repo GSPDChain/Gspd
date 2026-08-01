@@ -1,3 +1,4 @@
 #!/bin/bash
 
-build/bin/geth account new --datadir ./data
+../build/bin/geth account new \
+  --datadir ../gspd-data
