@@ -421,3 +421,142 @@ Thank you for your support.
 ## License
 
 This project is open source.
+
+## Initialize GSPD Mainnet
+
+```bash
+geth init genesis/mainnet.json --datadir /path/to/gspd-data
+```
+
+## Start GSPD Node
+
+```bash
+geth \
+  --datadir /path/to/gspd-data \
+  --networkid 2025 \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+```
+
+## Start Mining (Example)
+
+```bash
+geth \
+  --datadir /path/to/gspd-data \
+  --networkid 2025 \
+  --mine \
+  --miner.threads 4 \
+  --unlock YOUR_WALLET_ADDRESS \
+  --password password.txt
+```
+
+
+# GSPD
+
+GSPD is an open-source Proof-of-Work blockchain based on Go Ethereum. The project is designed to provide a decentralized network with native mining, RPC, wallet support, explorer, GRC20 smart contracts, and a decentralized exchange (DEX).
+
+## Features
+
+- Proof-of-Work (PoW)
+- Native GSPD Coin
+- GRC20 Smart Contracts
+- JSON-RPC API
+- Peer-to-Peer Network
+- Mining Support
+- Explorer Support
+- Wallet Support
+- DEX Support
+- Liquidity Pair Creation
+
+## Repository
+
+https://github.com/GSPDChain/Gspd
+
+## Requirements
+
+- Go 1.20+
+- Linux, macOS, or Windows
+
+## Build
+
+```bash
+make geth
+```
+
+The binary will be created in:
+
+```text
+build/bin/geth
+```
+
+## Initialize GSPD Mainnet
+
+```bash
+build/bin/geth init genesis/mainnet.json --datadir /path/to/gspd-data
+```
+
+Example:
+
+```bash
+build/bin/geth init genesis/mainnet.json --datadir /root/gspd-data
+```
+
+## Start GSPD Node
+
+```bash
+build/bin/geth \
+  --datadir /path/to/gspd-data \
+  --networkid 2025 \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+```
+
+## Start Mining
+
+```bash
+build/bin/geth \
+  --datadir /path/to/gspd-data \
+  --networkid 2025 \
+  --mine \
+  --miner.threads 4 \
+  --unlock YOUR_WALLET_ADDRESS \
+  --password password.txt
+```
+
+## Bootnode
+
+```bash
+build/bin/bootnode
+```
+
+## JSON RPC
+
+Default RPC:
+
+```
+http://127.0.0.1:18545
+```
+
+## Chain Information
+
+- Network Name: GSPD Mainnet
+- Chain ID: 2025
+- Consensus: Proof-of-Work
+
+## Genesis
+
+The official genesis block is located at:
+
+```
+genesis/mainnet.json
+```
+
+## License
+
+This project is released under the GNU Lesser General Public License v3.0.
