@@ -894,3 +894,316 @@ See the documentation provided in each repository.
 ## License
 
 MIT License
+
+
+Ya, untuk public miner GSPD, yang benar adalah dokumentasi yang kedua, tetapi ada satu hal penting yang perlu ditambahkan agar peer bisa saling menemukan.
+Miner publik akan menjalankan node seperti ini:
+build/bin/geth \
+  --datadir /root/gspd-data \
+  --networkid 2025 \
+  --port 30303 \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+Lalu jika ingin ikut mining:
+miner.start(4)
+atau menjalankan dengan:
+--mine --miner.threads 4
+Namun, agar node mereka benar-benar bergabung ke jaringan GSPD, dokumentasi sebaiknya juga menyertakan bootnode resmi. Misalnya:
+build/bin/geth \
+  --datadir /root/gspd-data \
+  --networkid 2025 \
+  --port 30303 \
+  --bootnodes "enode://ee973b2637cc86181df92e20342d7592130af06ef7551673df661275a21297c165fe16ab68e77030e619f8adc1d29b38f923e1e92de1e8a5b7e18ff29f0fd22c@182.8.130.113:30303" \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+Dengan begitu, saat miner menjalankan node:
+Mereka akan terhubung ke bootnode GSPD.
+Node akan menyinkronkan blockchain.
+Setelah sinkron, mereka bisa mulai mining dan blok yang ditemukan akan disebarkan ke jaringan.
+Mengenai masalah peerCount 0
+Kalau bootnode milikmu sendiri kadang menunjukkan:
+net.peerCount
+0
+padahal sebelumnya sempat menjadi 1 atau 2, berarti ada kemungkinan:
+Node lain belum aktif terus-menerus.
+Discovery belum menemukan peer yang stabil.
+Port 30303 TCP/UDP di salah satu sisi belum benar-benar terbuka.
+Node lain selesai sinkron lalu disconnect.
+Bootnode memang bisa sesekali memiliki peerCount 0 jika tidak ada node lain yang sedang online. Yang penting, ketika miner publik mulai menjalankan node menggunakan bootnode tersebut, mereka seharusnya dapat menemukan jaringan dan saling terhubung.
+
+
+Berikut pembaruan README.md yang dapat langsung menggantikan bagian Run GSPD Node dan Mining.
+# GSPD
+
+GSPD is an open-source Proof-of-Work blockchain based on Go Ethereum. The project provides a decentralized blockchain with native mining, GRC20 smart contracts, RPC, wallet support, explorer, and decentralized exchange (DEX).
+
+## Features
+
+- Proof-of-Work (Ethash)
+- Native GSPD Coin
+- GRC20 Smart Contracts
+- JSON-RPC API
+- Peer-to-Peer Network
+- Native Mining
+- Explorer
+- Wallet
+- DEX
+- Liquidity Pair Creation
+
+---
+
+# Build
+
+```bash
+make geth
+```
+
+Binary output:
+
+```text
+build/bin/geth
+```
+
+---
+
+# Initialize GSPD Mainnet
+
+```bash
+build/bin/geth init genesis/mainnet.json --datadir /path/to/gspd-data
+```
+
+Example:
+
+```bash
+build/bin/geth init genesis/mainnet.json --datadir /root/gspd-data
+```
+
+---
+
+# Run GSPD Node
+
+```bash
+build/bin/geth \
+  --datadir /root/gspd-data \
+  --networkid 2025 \
+  --port 30303 \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+```
+
+---
+
+# Join the GSPD Public Network
+
+To connect directly to the public GSPD network, start the node with the official bootstrap node.
+
+```bash
+build/bin/geth \
+  --datadir /root/gspd-data \
+  --networkid 2025 \
+  --port 30303 \
+  --bootnodes "enode://ee973b2637cc86181df92e20342d7592130af06ef7551673df661275a21297c165fe16ab68e77030e619f8adc1d29b38f923e1e92de1e8a5b7e18ff29f0fd22c@182.8.130.113:30303" \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+```
+
+When started with the official bootnode:
+
+- The node connects to the GSPD peer-to-peer network.
+- The blockchain begins synchronizing automatically.
+- After synchronization is complete, mining can be started.
+- Newly mined blocks are propagated to the entire GSPD network.
+
+---
+
+# Mining
+
+Start mining from the JavaScript console:
+
+```javascript
+miner.start(4)
+```
+
+Or launch the node with mining enabled:
+
+```bash
+build/bin/geth \
+  --datadir /root/gspd-data \
+  --networkid 2025 \
+  --bootnodes "enode://ee973b2637cc86181df92e20342d7592130af06ef7551673df661275a21297c165fe16ab68e77030e619f8adc1d29b38f923e1e92de1e8a5b7e18ff29f0fd22c@182.8.130.113:30303" \
+  --mine \
+  --miner.threads 4
+```
+
+---
+
+# Network Information
+
+| Item | Value |
+|------|-------|
+| Network | GSPD Mainnet |
+| Chain ID | 2025 |
+| Network ID | 2025 |
+| Consensus | Ethash (Proof-of-Work) |
+
+### Genesis Hash
+
+```
+0x4ac0c9019e184b0ed333b977bb246084aadcf68d478618a2a33a2dd35e07afbb
+```
+
+### Official Bootstrap Node
+
+```
+enode://ee973b2637cc86181df92e20342d7592130af06ef7551673df661275a21297c165fe16ab68e77030e619f8adc1d29b38f923e1e92de1e8a5b7e18ff29f0fd22c@182.8.130.113:30303
+```
+
+---
+
+# Peer Discovery
+
+It is normal for a node to occasionally report:
+
+```javascript
+net.peerCount
+0
+```
+
+A temporary peer count of zero does not necessarily indicate a problem.
+
+Possible reasons include:
+
+- No other public nodes are currently online.
+- Peer discovery has not yet found stable peers.
+- TCP/UDP port 30303 is not reachable.
+- Remote peers finished synchronization and disconnected.
+
+As more public miners run GSPD nodes using the official bootstrap node, peer discovery will improve and nodes will automatically connect to one another.
+
+---
+
+# Genesis
+
+```
+genesis/mainnet.json
+```
+
+---
+
+# Repository
+
+https://github.com/GSPDChain/Gspd
+
+---
+
+# License
+
+GNU Lesser General Public License v3.0
+Versi ini lebih lengkap untuk miner publik karena menjelaskan:
+cara menjalankan node,
+cara bergabung ke jaringan melalui bootnode resmi,
+cara mulai mining,
+dan penjelasan mengenai net.peerCount yang kadang menjadi 0 agar pengguna tidak mengira node mereka bermasalah.
+
+## Run GSPD Node
+
+```bash
+build/bin/geth \
+  --datadir /root/gspd-data \
+  --networkid 2025 \
+  --port 30303 \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+```
+
+---
+
+## Join the GSPD Public Network
+
+To connect to the public GSPD network, use the official bootstrap node.
+
+```bash
+build/bin/geth \
+  --datadir /root/gspd-data \
+  --networkid 2025 \
+  --port 30303 \
+  --bootnodes "enode://ee973b2637cc86181df92e20342d7592130af06ef7551673df661275a21297c165fe16ab68e77030e619f8adc1d29b38f923e1e92de1e8a5b7e18ff29f0fd22c@182.8.130.113:30303" \
+  --http \
+  --http.addr 127.0.0.1 \
+  --http.port 18545 \
+  --http.api admin,eth,net,web3,personal \
+  console
+```
+
+When using the official bootnode:
+
+- Connects to the GSPD peer-to-peer network.
+- Synchronizes the blockchain automatically.
+- Ready to start mining after synchronization.
+- Mined blocks are propagated across the GSPD network.
+
+---
+
+## Mining
+
+Start mining from the JavaScript console:
+
+```javascript
+miner.start(4)
+```
+
+Or start mining directly:
+
+```bash
+build/bin/geth \
+  --datadir /root/gspd-data \
+  --networkid 2025 \
+  --bootnodes "enode://ee973b2637cc86181df92e20342d7592130af06ef7551673df661275a21297c165fe16ab68e77030e619f8adc1d29b38f923e1e92de1e8a5b7e18ff29f0fd22c@182.8.130.113:30303" \
+  --mine \
+  --miner.threads 4
+```
+
+---
+
+## Official Bootstrap Node
+
+```
+enode://ee973b2637cc86181df92e20342d7592130af06ef7551673df661275a21297c165fe16ab68e77030e619f8adc1d29b38f923e1e92de1e8a5b7e18ff29f0fd22c@182.8.130.113:30303
+```
+
+---
+
+## Peer Discovery
+
+Occasionally you may see:
+
+```javascript
+net.peerCount
+0
+```
+
+This is normal for a public network and does not necessarily indicate a problem.
+
+Possible reasons include:
+
+- No other public nodes are currently online.
+- Peer discovery is still searching for peers.
+- TCP/UDP port 30303 is not reachable.
+- Remote peers have disconnected after synchronization.
+
+As more public miners join the network using the official bootstrap node, peer connectivity will improve automatically.
